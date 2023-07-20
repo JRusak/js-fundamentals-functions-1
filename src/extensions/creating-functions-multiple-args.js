@@ -9,6 +9,15 @@
 // -1, 1        | [-1, 0, 1]
 //
 // TODO: write code below
+function generateArray(lower, upper) {
+  const arr = []
+
+  for (let i = lower; i <= upper; i++) {
+    arr.push(i)
+  }
+
+  return arr
+}
 
 // 2. define a function that takes two arguments: a string and a number.
 // The function should return the same string but in upper case with exclamation
@@ -21,6 +30,9 @@
 // error, 10    | ERROR!!!!!!!!!!
 //
 // TODO: write code below
+function capitalizeAndAddExclamationMarks(string, number) {
+  return string.toUpperCase() + '!'.repeat(number)
+}
 
 // 3. define a function that takes two arguments: a string and a number.
 // The function should return the new time in 24hr time after adding the additional time in minutes.
@@ -33,10 +45,31 @@
 // '12:50', 120 | '14:50'
 // '23:50', 30  | '00:20'
 // TODO: write code below
+function addMinutes(string, number) {
+  const arr = string.split(':')
+
+  let minutes = parseInt(arr[0]) * 60 + parseInt(arr[1])
+  minutes += number
+
+  const hours = Math.floor(minutes / 60)
+
+  const newHour = hours % 24
+  const newMinutes = minutes - 60 * hours
+
+  if (newHour === 0) {
+    return (
+      newHour.toString().padStart(2, '0') +
+      ':' +
+      newMinutes.toString().padStart(2, '0')
+    )
+  }
+
+  return newHour + ':' + newMinutes.toString().padStart(2, '0')
+}
 
 // TODO: change the exported value to be the name of the function you defined
 module.exports = {
-  a: undefined, // 1. change undefined to be the name of the function defined to create the range of numbers (the first todo)
-  b: undefined, // 2. change undefined to be the name of the function defined to return the string with exclamations (the second todo)
-  c: undefined // etc
+  a: generateArray, // 1. change undefined to be the name of the function defined to create the range of numbers (the first todo)
+  b: capitalizeAndAddExclamationMarks, // 2. change undefined to be the name of the function defined to return the string with exclamations (the second todo)
+  c: addMinutes // etc
 }
